@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reproductor de Video</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertidor de Video a GIF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        #video-container {
+            margin-bottom: 20px;
+        }
+
+        #gif-container {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div id="container">
+        <div id="video-container">
+            <video controls id="video" width="400">
+                <source src="https://media.discordapp.net/attachments/1131712051711049838/1202964655895740559/0202_14.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+            <br>
+            <button onclick="convertToGIF()">Convertir a GIF</button>
+        </div>
+        <div id="gif-container">
+            <img id="gif" src="" alt="GIF">
+        </div>
+    </div>
 
-<video controls width="640" height="360">
-  <source src="https://media.discordapp.net/attachments/1131712051711049838/1202964655895740559/0202_14.mp4" type="video/mp4">
-  Tu navegador no soporta la reproducción de videos.
-</video>
-
+    <script>
+        function convertToGIF() {
+            var video = document.getElementById('video');
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            var gif = canvas.toDataURL('image/gif');
+            var gifContainer = document.getElementById('gif-container');
+            var gifImage = document.getElementById('gif');
+            gifImage.src = gif;
+            gifContainer.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
 
