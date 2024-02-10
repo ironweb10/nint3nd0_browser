@@ -4,51 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reproductor de Video</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  #videoPlayer {
-    width: 640px;
-    height: 360px;
-  }
-</style>
 </head>
 <body>
 
-<video id="videoPlayer" controls>
+<video controls width="640" height="360">
   <source src="https://media.discordapp.net/attachments/1131712051711049838/1202964655895740559/0202_14.mp4" type="video/mp4">
   Tu navegador no soporta la reproducción de videos.
 </video>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var video = document.getElementById('videoPlayer');
-
-    video.addEventListener('error', function() {
-      alert('Ocurrió un error al cargar el video.');
-    });
-
-    video.addEventListener('play', function() {
-      console.log('Video empezó a reproducirse');
-    });
-
-    video.addEventListener('pause', function() {
-      console.log('Video pausado');
-    });
-
-    video.addEventListener('ended', function() {
-      console.log('Video terminado');
-    });
-  });
-</script>
-
 </body>
 </html>
+
