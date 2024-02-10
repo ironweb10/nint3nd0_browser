@@ -20,10 +20,6 @@
             text-align: center;
         }
 
-        #video-container {
-            margin-bottom: 20px;
-        }
-
         #gif-container {
             display: none;
         }
@@ -31,14 +27,6 @@
 </head>
 <body>
     <div id="container">
-        <div id="video-container">
-            <video controls id="video" width="400">
-                <source src="https://media.discordapp.net/attachments/1131712051711049838/1202964655895740559/0202_14.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
-            <br>
-            <button onclick="convertToGIF()">Convertir a GIF</button>
-        </div>
         <div id="gif-container">
             <img id="gif" src="" alt="GIF">
         </div>
@@ -46,18 +34,26 @@
 
     <script>
         function convertToGIF() {
-            var video = document.getElementById('video');
-            var canvas = document.createElement('canvas');
-            var context = canvas.getContext('2d');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            var gif = canvas.toDataURL('image/gif');
-            var gifContainer = document.getElementById('gif-container');
-            var gifImage = document.getElementById('gif');
-            gifImage.src = gif;
-            gifContainer.style.display = 'block';
+            var videoSrc = "https://media.discordapp.net/attachments/1131712051711049838/1202964655895740559/0202_14.mp4";
+            var video = document.createElement('video');
+            video.src = videoSrc;
+            video.crossOrigin = "anonymous"; // Para evitar errores de CORS
+            video.onloadedmetadata = function() {
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                var gif = canvas.toDataURL('image/gif');
+                var gifContainer = document.getElementById('gif-container');
+                var gifImage = document.getElementById('gif');
+                gifImage.src = gif;
+                gifContainer.style.display = 'block';
+            };
         }
+
+        // Llamar a la función de conversión automáticamente cuando la página cargue
+        window.onload = convertToGIF;
     </script>
 </body>
 </html>
